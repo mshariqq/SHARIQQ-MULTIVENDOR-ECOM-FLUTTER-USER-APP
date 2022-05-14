@@ -1,4 +1,4 @@
-# iconnect
+# Shariqq Multivendor Ecom Flutter User App
 
 A new Flutter project.
 

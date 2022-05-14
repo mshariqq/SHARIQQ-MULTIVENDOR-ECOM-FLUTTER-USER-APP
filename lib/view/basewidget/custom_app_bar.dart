@@ -61,11 +61,11 @@ class CustomAppBar extends StatelessWidget {
                 )
               : SizedBox.shrink(),
           SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
-          Expanded(
+          Flexible(
             child: Text(
               title,
               style:
-                  titilliumRegular.copyWith(fontSize: 20, color: Colors.white),
+                  titilliumRegular.copyWith(fontSize: 16, color: Colors.white),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

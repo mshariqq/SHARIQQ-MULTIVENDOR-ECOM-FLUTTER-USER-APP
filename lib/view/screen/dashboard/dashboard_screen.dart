@@ -16,7 +16,6 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   PageController _pageController = PageController();
   int _pageIndex = 0;
-
   List<Widget> _screens;
 
   GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey();
@@ -24,7 +23,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   void initState() {
     super.initState();
-
     _screens = [
       HomePage(),
       InboxScreen(isBackButtonExist: false),
@@ -32,7 +30,6 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       NotificationScreen(isBacButtonExist: false),
       MoreScreen(),
     ];
-
     NetworkInfo.checkConnectivity(context);
   }
 
@@ -50,20 +47,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: true,
           selectedItemColor: Theme.of(context).primaryColor,
           unselectedItemColor: Theme.of(context).textTheme.bodyText1.color,
-          showUnselectedLabels: true,
+          showUnselectedLabels: false,
           currentIndex: _pageIndex,
           type: BottomNavigationBarType.fixed,
           items: [
-            _barItem(Images.home_image, getTranslated('home', context), 0),
             //TODO: seller
-            _barItem(Images.message_image, getTranslated('inbox', context), 1),
+            _barItem(Icon(Icons.home_outlined), getTranslated('home', context), 0),
+            _barItem(Icon(Icons.message_outlined), getTranslated('inbox', context), 1),
             _barItem(
-                Images.shopping_image, getTranslated('orders', context), 2),
+                Icon(Icons.shopping_bag_outlined), getTranslated('orders', context), 2),
             _barItem(
-                Images.notification, getTranslated('notification', context), 3),
-            _barItem(Images.more_image, getTranslated('more', context), 4),
+                Icon(Icons.notifications_active_outlined), getTranslated('notification', context), 3),
+            _barItem(Icon(Icons.settings_outlined), "Settings", 4),
           ],
           onTap: (int index) {
             _setPage(index);
@@ -81,16 +79,17 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     );
   }
 
-  BottomNavigationBarItem _barItem(String icon, String label, int index) {
+  BottomNavigationBarItem _barItem(Icon icon, String label, int index) {
     return BottomNavigationBarItem(
-      icon: Image.asset(
-        icon,
-        color: index == _pageIndex
-            ? Theme.of(context).primaryColor
-            : Theme.of(context).textTheme.bodyText1.color.withOpacity(0.5),
-        height: 25,
-        width: 25,
-      ),
+      // icon: Image.asset(
+      //   icon,
+      //   color: index == _pageIndex
+      //       ? Theme.of(context).primaryColor
+      //       : Theme.of(context).textTheme.bodyText1.color.withOpacity(0.5),
+      //   height: 25,
+      //   width: 25,
+      // ),
+      icon: icon,
       label: label,
     );
   }

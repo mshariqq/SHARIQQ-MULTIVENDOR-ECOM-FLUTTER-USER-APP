@@ -20,7 +20,7 @@ class SearchScreen extends StatelessWidget {
     Provider.of<SearchProvider>(context, listen: false).initHistoryList();
 
     return Scaffold(
-      backgroundColor: ColorResources.getIconBg(context),
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
       body: Column(
         children: [
@@ -150,6 +150,19 @@ class SearchScreen extends StatelessWidget {
                     );
             },
           ),
+
+          SizedBox(
+            height: 50,
+          ),
+          TextButton(
+              onPressed: () {},
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Go Back",
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                ),
+              ))
         ],
       ),
     );

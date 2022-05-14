@@ -56,11 +56,11 @@ class CustomExpandedAppBar extends StatelessWidget {
                       .setFromSetting(false);
                   Navigator.pop(context);
                 }),
-            Text(title,
+            Flexible(child: Text(title,
                 style: titilliumRegular.copyWith(
                     fontSize: 20, color: Colors.white),
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis),
+                overflow: TextOverflow.ellipsis)),
           ]),
         ),
 

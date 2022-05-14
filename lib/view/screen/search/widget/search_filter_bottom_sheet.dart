@@ -26,16 +26,17 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
       decoration: BoxDecoration(
         color: Theme.of(context).highlightColor,
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            topLeft: Radius.circular(5), topRight: Radius.circular(5)),
       ),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         Row(children: [
+         SizedBox(height: 50,),
           Expanded(
               child: Text(getTranslated('sort_and_filters', context),
-                  style: titilliumBold)),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
           InkWell(
             onTap: () => Navigator.pop(context),
-            child: Icon(Icons.cancel, color: ColorResources.getRed(context)),
+            child: Icon(Icons.cancel, color: Colors.pinkAccent),
           )
         ]),
         Divider(),
@@ -68,6 +69,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                             fontSize: Dimensions.FONT_SIZE_SMALL),
                         decoration: InputDecoration(
                           filled: true,
+                          hintText: "Start",
                           fillColor: ColorResources.getImageBg(context),
                           contentPadding:
                               EdgeInsets.only(left: 5.0, bottom: 17),
@@ -82,7 +84,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                         ),
                       ),
                     ),
-                    Text(' - '),
+                    Text(' to '),
                     SizedBox(
                       width: 100,
                       child: TextField(
@@ -97,6 +99,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                         ),
                         decoration: InputDecoration(
                           filled: true,
+                          hintText: "End",
                           fillColor: ColorResources.getImageBg(context),
                           contentPadding:
                               EdgeInsets.only(left: 5.0, bottom: 17),
@@ -114,7 +117,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
                   ],
                 ),
               ),
-              SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
+              SizedBox(height: 30),
               Text(
                 getTranslated('SORT_BY', context),
                 style: titilliumSemiBold.copyWith(
@@ -146,7 +149,7 @@ class _SearchFilterBottomSheetState extends State<SearchFilterBottomSheet> {
               Padding(
                 padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
                 child: CustomButton(
-                  buttonText: getTranslated('APPLY', context),
+                  buttonText: getTranslated('APPLY_FILTERS', context),
                   onTap: () {
                     double minPrice = 0.0;
                     double maxPrice = 0.0;

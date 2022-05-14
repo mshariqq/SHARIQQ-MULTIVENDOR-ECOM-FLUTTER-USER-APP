@@ -86,7 +86,7 @@ class AddressBottomSheet extends StatelessWidget {
                                         ? Images.home_image
                                         : profile.addressList[index]
                                                     .addressType ==
-                                                'Ofice'
+                                                'Office'
                                             ? Images.bag
                                             : Images.more_image,
                                     color: ColorResources.getSellerTxt(context),

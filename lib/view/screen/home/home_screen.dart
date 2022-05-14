@@ -116,16 +116,17 @@ class _HomePageState extends State<HomePage> {
             slivers: [
               // App Bar
               SliverAppBar(
+                pinned: true,
                 floating: true,
-                elevation: 0,
+                elevation: 2,
                 centerTitle: false,
                 automaticallyImplyLeading: false,
                 backgroundColor: Theme.of(context).highlightColor,
                 title: Row(
                   children: [
-                    Image.asset(Images.logo_with_name_image, height: 35),
+                    Image.asset(Images.logo_with_name_image, height: 25),
                     SizedBox(width: 10,),
-                    Text("Shariqq Multivendor Ecom Demo" ,style: TextStyle(color: Theme.of(context).primaryColor),)
+                    Flexible(child: Text("SHARIQQ MULTIVENDOR" ,style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 18),))
                   ],
                 ),
                 actions: [
@@ -135,12 +136,13 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(builder: (_) => CartScreen()));
                     },
                     icon: Stack(clipBehavior: Clip.none, children: [
-                      Image.asset(
-                        Images.cart_arrow_down_image,
-                        height: Dimensions.ICON_SIZE_DEFAULT,
-                        width: Dimensions.ICON_SIZE_DEFAULT,
-                        color: ColorResources.getPrimary(context),
-                      ),
+                      // Image.asset(
+                      //   Images.cart_arrow_down_image,
+                      //   height: Dimensions.ICON_SIZE_DEFAULT,
+                      //   width: Dimensions.ICON_SIZE_DEFAULT,
+                      //   color: ColorResources.getPrimary(context),
+                      // ),
+                      Icon(Icons.shopping_bag, color: Theme.of(context).primaryColor,),
                       Positioned(
                         top: -4,
                         right: -4,
@@ -158,49 +160,61 @@ class _HomePageState extends State<HomePage> {
                         }),
                       ),
                     ]),
+
                   ),
+                  IconButton(onPressed: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => SearchScreen()));
+                  }, icon: Icon(Icons.search_rounded, color: Theme.of(context).primaryColor,))
 
                 ],
               ),
 
               // Search Button
-              SliverPersistentHeader(
-                  pinned: false,
-                  delegate: SliverDelegate(
-                      child: InkWell(
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => SearchScreen())),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: Dimensions.PADDING_SIZE_SMALL,
-                          vertical: 2),
-                      color: Theme.of(context).highlightColor,
-                      alignment: Alignment.center,
-                      child: Container(
-                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                        height: 50,
-                        alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(
-                          color: ColorResources.getGrey(context),
-                          borderRadius: BorderRadius.circular(
-                              Dimensions.PADDING_SIZE_SMALL),
-                        ),
-                        child: Row(children: [
-                          Icon(Icons.search,
-                              color: ColorResources.getPrimary(context),
-                              size: Dimensions.ICON_SIZE_LARGE),
-                          SizedBox(width: 5),
-                          Text(getTranslated('SEARCH_HINT', context),
-                              style: robotoRegular.copyWith(
-                                  color: Theme.of(context).primaryColor)),
-                        ]),
-                      ),
-                    ),
-                  ))),
+              // SliverPersistentHeader(
+              //     pinned: true,
+              //     delegate: SliverDelegate(
+              //         child: InkWell(
+              //       onTap: () => Navigator.push(context,
+              //           MaterialPageRoute(builder: (_) => SearchScreen())),
+              //       child: Container(
+              //         padding: EdgeInsets.symmetric(
+              //             horizontal: Dimensions.PADDING_SIZE_SMALL,
+              //             vertical: 2),
+              //         color: Theme.of(context).highlightColor,
+              //         alignment: Alignment.center,
+              //         child: Container(
+              //           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+              //           height: 50,
+              //           alignment: Alignment.centerLeft,
+              //           decoration: BoxDecoration(
+              //             color: ColorResources.getGrey(context),
+              //             borderRadius: BorderRadius.circular(
+              //                 Dimensions.PADDING_SIZE_SMALL),
+              //           ),
+              //           child: Row(children: [
+              //             Icon(Icons.search,
+              //                 color: ColorResources.getPrimary(context),
+              //                 size: Dimensions.ICON_SIZE_LARGE),
+              //             SizedBox(width: 5),
+              //             Text(getTranslated('SEARCH_HINT', context),
+              //                 style: robotoRegular.copyWith(
+              //                     color: Theme.of(context).primaryColor)),
+              //           ]),
+              //         ),
+              //       ),
+              //     ))),
 
               SliverToBoxAdapter(
                 child: Column(
                   children: [
+
+                    // banners
+                    Padding(
+                      padding:
+                      EdgeInsets.only(top: Dimensions.PADDING_SIZE_LARGE),
+                      child: BannersView(),
+                    ),
 
                     // Featured Products
                     Padding(
@@ -297,14 +311,6 @@ class _HomePageState extends State<HomePage> {
                             : SizedBox.shrink();
                       },
                     ),
-
-                    // banners
-                    Padding(
-                      padding:
-                      EdgeInsets.only(top: Dimensions.PADDING_SIZE_LARGE),
-                      child: BannersView(),
-                    ),
-
 
                     //top seller
                     Padding(

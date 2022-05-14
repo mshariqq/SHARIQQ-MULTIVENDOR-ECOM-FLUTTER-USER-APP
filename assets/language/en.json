@@ -162,7 +162,7 @@
   "app_info": "App Info",
   "sign_out": "Sign Out",
   "home": "Home",
-  "inbox": "Inbox",
+  "inbox": "My Inbox",
   "more": "More",
   "checkout": "Checkout",
   "add_your_address": "Add your address",
@@ -194,7 +194,7 @@
   "write_your_experience_here": "Write your experience here",
   "upload_images": "Upload images",
   "products_in_the_cart": "Products in the cart",
-  "sort_and_filters": "Sort and filters",
+  "sort_and_filters": "Filter Options",
   "low_to_high_price": "Low to high price",
   "high_to_low_price": "High to low price",
   "select_shipping_method": "Select shipping method",
@@ -271,5 +271,6 @@
   "send_otp": "Send Otp",
   "password_reset_successfully": "Password Reset Successfully",
   "input_valid_phone_number": "Input valid phone number",
-  "input_valid_otp": "Input valid Otp"
+  "input_valid_otp": "Input valid Otp",
+  "APPLY_FILTERS": "Apply Filters to Results"
 }

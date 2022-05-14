@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "652446205156",
+    "project_id": "shariqqmultivendorecomuserapp",
+    "storage_bucket": "shariqqmultivendorecomuserapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652446205156:android:bccc52a0afdf71f38598f1",
+        "android_client_info": {
+          "package_name": "com.sme.android.user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652446205156-c916vs93hc166ktaukbrnbsubbu68fv1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiwFsoy5-pQ8ZzBUJuoWky7RQSyHWXzQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652446205156-c916vs93hc166ktaukbrnbsubbu68fv1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

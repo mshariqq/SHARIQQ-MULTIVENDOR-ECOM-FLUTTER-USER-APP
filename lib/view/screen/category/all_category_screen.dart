@@ -25,149 +25,149 @@ class AllCategoryScreen extends StatelessWidget {
           Expanded(child: Consumer<CategoryProvider>(
             builder: (context, categoryProvider, child) {
               return categoryProvider.categoryList.length != 0
-                  ? Row(children: [
-                      Container(
-                        width: 100,
-                        margin: EdgeInsets.only(top: 3),
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).highlightColor,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey[
-                                    Provider.of<ThemeProvider>(context)
-                                            .darkTheme
-                                        ? 700
-                                        : 200],
-                                spreadRadius: 1,
-                                blurRadius: 1)
-                          ],
-                        ),
+                  ? Padding(padding: EdgeInsets.all(10), child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+
+                    Text("Categories", style: TextStyle(fontWeight: FontWeight.bold),),
+                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 100,
+                      // width: 400,
+                      child: Scrollbar(
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
                           itemCount: categoryProvider.categoryList.length,
                           padding: EdgeInsets.all(0),
                           itemBuilder: (context, index) {
                             Category _category =
-                                categoryProvider.categoryList[index];
+                            categoryProvider.categoryList[index];
                             return InkWell(
                               onTap: () {
                                 Provider.of<CategoryProvider>(context,
-                                        listen: false)
+                                    listen: false)
                                     .changeSelectedIndex(index);
                               },
                               child: CategoryItem(
                                 title: _category.name,
                                 icon: _category.icon,
                                 isSelected:
-                                    categoryProvider.categorySelectedIndex ==
-                                        index,
+                                categoryProvider.categorySelectedIndex ==
+                                    index,
                               ),
                             );
                           },
                         ),
                       ),
-                      Expanded(
+                    ),
+                    SizedBox(height: 30,),
+                    Text("Sub Categories", style: TextStyle(fontWeight: FontWeight.bold),),
+                    SizedBox(height: 10,),
+                    Expanded(
                           child: ListView.builder(
-                        padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-                        itemCount: categoryProvider
+                            padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
+                            itemCount: categoryProvider
                                 .categoryList[
-                                    categoryProvider.categorySelectedIndex]
+                            categoryProvider.categorySelectedIndex]
                                 .subCategories
                                 .length +
-                            1,
-                        itemBuilder: (context, index) {
-                          SubCategory _subCategory;
-                          if (index != 0) {
-                            _subCategory = categoryProvider
-                                .categoryList[
-                                    categoryProvider.categorySelectedIndex]
-                                .subCategories[index - 1];
-                          }
-                          if (index == 0) {
-                            return Ink(
-                              color: Theme.of(context).highlightColor,
-                              child: ListTile(
-                                title: Text(getTranslated('all', context),
-                                    style: titilliumSemiBold,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis),
-                                trailing: Icon(Icons.navigate_next),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              BrandAndCategoryProductScreen(
-                                                isBrand: false,
-                                                id: categoryProvider
-                                                    .categoryList[categoryProvider
+                                1,
+                            itemBuilder: (context, index) {
+                              SubCategory _subCategory;
+                              if (index != 0) {
+                                _subCategory = categoryProvider
+                                    .categoryList[
+                                categoryProvider.categorySelectedIndex]
+                                    .subCategories[index - 1];
+                              }
+                              if (index == 0) {
+                                return Ink(
+                                  // color: Theme.of(context).highlightColor,
+                                  child: ListTile(
+                                    title: Text('Show All',
+                                        style: titilliumSemiBold,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis),
+                                    trailing: Icon(Icons.navigate_next),
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  BrandAndCategoryProductScreen(
+                                                    isBrand: false,
+                                                    id: categoryProvider
+                                                        .categoryList[categoryProvider
                                                         .categorySelectedIndex]
-                                                    .id
-                                                    .toString(),
-                                                name: categoryProvider
-                                                    .categoryList[categoryProvider
+                                                        .id
+                                                        .toString(),
+                                                    name: categoryProvider
+                                                        .categoryList[categoryProvider
                                                         .categorySelectedIndex]
-                                                    .name,
-                                              )));
-                                },
-                              ),
-                            );
-                          } else if (_subCategory.subSubCategories.length !=
-                              0) {
-                            return Ink(
-                              color: Theme.of(context).highlightColor,
-                              child: Theme(
-                                data: Provider.of<ThemeProvider>(context)
+                                                        .name,
+                                                  )));
+                                    },
+                                  ),
+                                );
+                              } else if (_subCategory.subSubCategories.length !=
+                                  0) {
+                                return Ink(
+                                  // color: Theme.of(context).highlightColor,
+                                  child: Theme(
+                                    data: Provider.of<ThemeProvider>(context)
                                         .darkTheme
-                                    ? ThemeData.dark()
-                                    : ThemeData.light(),
-                                child: ExpansionTile(
-                                  key: Key(
-                                      '${Provider.of<CategoryProvider>(context).categorySelectedIndex}$index'),
-                                  title: Text(_subCategory.name,
-                                      style: titilliumSemiBold.copyWith(
-                                          color: Theme.of(context)
-                                              .textTheme
-                                              .bodyText1
-                                              .color),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis),
-                                  children: _getSubSubCategories(
-                                      context, _subCategory),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return Ink(
-                              color: Theme.of(context).highlightColor,
-                              child: ListTile(
-                                title: Text(_subCategory.name,
-                                    style: titilliumSemiBold,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis),
-                                trailing: Icon(Icons.navigate_next,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        .color),
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              BrandAndCategoryProductScreen(
-                                                isBrand: false,
-                                                id: _subCategory.id.toString(),
-                                                name: _subCategory.name,
-                                              )));
-                                },
-                              ),
-                            );
-                          }
-                        },
-                      )),
-                    ])
+                                        ? ThemeData.dark()
+                                        : ThemeData.light(),
+                                    child: ExpansionTile(
+                                      key: Key(
+                                          '${Provider.of<CategoryProvider>(context).categorySelectedIndex}$index'),
+                                      title: Text(_subCategory.name,
+                                          style: titilliumSemiBold.copyWith(
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1
+                                                  .color),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis),
+                                      children: _getSubSubCategories(
+                                          context, _subCategory),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Ink(
+                                  // color: Theme.of(context).highlightColor,
+                                  child: ListTile(
+                                    title: Text(_subCategory.name,
+                                        style: titilliumSemiBold,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis),
+                                    trailing: Icon(Icons.navigate_next,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            .color),
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (_) =>
+                                                  BrandAndCategoryProductScreen(
+                                                    isBrand: false,
+                                                    id: _subCategory.id.toString(),
+                                                    name: _subCategory.name,
+                                                  )));
+                                    },
+                                  ),
+                                );
+                              }
+                            },
+                          )
+                      ),
+
+                  ]),)
                   : Center(
                       child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation<Color>(
@@ -183,20 +183,14 @@ class AllCategoryScreen extends StatelessWidget {
       BuildContext context, SubCategory subCategory) {
     List<Widget> _subSubCategories = [];
     _subSubCategories.add(Container(
-      color: ColorResources.getIconBg(context),
+      color: Colors.white,
       margin:
-          EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+          EdgeInsets.symmetric(horizontal: 0),
       child: ListTile(
         title: Row(
           children: [
-            Container(
-              height: 7,
-              width: 7,
-              decoration: BoxDecoration(
-                  color: ColorResources.getPrimary(context),
-                  shape: BoxShape.circle),
-            ),
-            SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+            Icon(Icons.arrow_right),
+            SizedBox(width: 10,),
             Flexible(
                 child: Text(
               getTranslated('all', context),
@@ -221,20 +215,14 @@ class AllCategoryScreen extends StatelessWidget {
     ));
     for (int index = 0; index < subCategory.subSubCategories.length; index++) {
       _subSubCategories.add(Container(
-        color: ColorResources.getIconBg(context),
+        color: Colors.white,
         margin: EdgeInsets.symmetric(
             horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
         child: ListTile(
           title: Row(
             children: [
-              Container(
-                height: 7,
-                width: 7,
-                decoration: BoxDecoration(
-                    color: ColorResources.getPrimary(context),
-                    shape: BoxShape.circle),
-              ),
-              SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+              Icon(Icons.arrow_right),
+              SizedBox(width: 10,),
               Flexible(
                   child: Text(
                 subCategory.subSubCategories[index].name,
@@ -277,7 +265,7 @@ class CategoryItem extends StatelessWidget {
           vertical: Dimensions.PADDING_SIZE_EXTRA_SMALL, horizontal: 2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: isSelected ? ColorResources.getPrimary(context) : null,
+        color: isSelected ? Theme.of(context).primaryColor : null,
       ),
       child: Center(
         child:
@@ -287,10 +275,10 @@ class CategoryItem extends StatelessWidget {
             width: 50,
             decoration: BoxDecoration(
               border: Border.all(
-                  width: 2,
+                  width: 1,
                   color: isSelected
                       ? Theme.of(context).highlightColor
-                      : Theme.of(context).hintColor),
+                      : Theme.of(context).primaryColor),
               borderRadius: BorderRadius.circular(10),
             ),
             child: ClipRRect(
@@ -316,7 +304,7 @@ class CategoryItem extends StatelessWidget {
                   fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
                   color: isSelected
                       ? Theme.of(context).highlightColor
-                      : Theme.of(context).hintColor,
+                      : Theme.of(context).primaryColor,
                 )),
           ),
         ]),

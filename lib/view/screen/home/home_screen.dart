@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage> {
             slivers: [
               // App Bar
               SliverAppBar(
+                stretch: true,
                 pinned: true,
                 floating: true,
                 elevation: 2,
@@ -125,13 +126,9 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: Theme.of(context).highlightColor,
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(onPressed: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => MoreScreen()));
-                    }, icon: Icon(Icons.menu_sharp, color: Theme.of(context).primaryColor,)),
-                    SizedBox(width: 20,),
+
                     Image.asset(Images.logo_with_name_image, height: 25),
                     SizedBox(width: 10,),
                     Flexible(child: Text("SHARIQQ.COM" ,style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 18),))
@@ -173,50 +170,18 @@ class _HomePageState extends State<HomePage> {
                   IconButton(onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => SearchScreen()));
-                  }, icon: Icon(Icons.search_rounded, color: Theme.of(context).primaryColor,))
+                  }, icon: Icon(Icons.search_rounded, color: Theme.of(context).primaryColor,)),
+                  IconButton(onPressed: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => MoreScreen()));
+                  }, icon: Icon(Icons.menu_sharp, color: Theme.of(context).primaryColor,)),
 
                 ],
               ),
 
-              // Search Button
-              // SliverPersistentHeader(
-              //     pinned: true,
-              //     delegate: SliverDelegate(
-              //         child: InkWell(
-              //       onTap: () => Navigator.push(context,
-              //           MaterialPageRoute(builder: (_) => SearchScreen())),
-              //       child: Container(
-              //         padding: EdgeInsets.symmetric(
-              //             horizontal: Dimensions.PADDING_SIZE_SMALL,
-              //             vertical: 2),
-              //         color: Theme.of(context).highlightColor,
-              //         alignment: Alignment.center,
-              //         child: Container(
-              //           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
-              //           height: 50,
-              //           alignment: Alignment.centerLeft,
-              //           decoration: BoxDecoration(
-              //             color: ColorResources.getGrey(context),
-              //             borderRadius: BorderRadius.circular(
-              //                 Dimensions.PADDING_SIZE_SMALL),
-              //           ),
-              //           child: Row(children: [
-              //             Icon(Icons.search,
-              //                 color: ColorResources.getPrimary(context),
-              //                 size: Dimensions.ICON_SIZE_LARGE),
-              //             SizedBox(width: 5),
-              //             Text(getTranslated('SEARCH_HINT', context),
-              //                 style: robotoRegular.copyWith(
-              //                     color: Theme.of(context).primaryColor)),
-              //           ]),
-              //         ),
-              //       ),
-              //     ))),
-
               SliverToBoxAdapter(
                 child: Column(
                   children: [
-
                     // banners
                     Padding(
                       padding:

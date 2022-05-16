@@ -45,8 +45,8 @@ class AllProductScreen extends StatelessWidget {
         ),
         title: Text(
             productType == ProductType.FEATURED_PRODUCT
-                ? 'Featured Product'
-                : 'Latest Product',
+                ? 'Featured Products'
+                : 'Latest Products',
             style: titilliumRegular.copyWith(
                 fontSize: 20, color: ColorResources.WHITE)),
       ),

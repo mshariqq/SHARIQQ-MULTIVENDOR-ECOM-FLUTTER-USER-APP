@@ -32,6 +32,7 @@ import 'package:shariqq_multivendor_ecom_userapp/view/screen/setting/settings_sc
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/support/support_ticket_screen.dart';
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/wishlist/wishlist_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import 'faq_screen.dart';
 
@@ -162,41 +163,44 @@ class _MoreScreenState extends State<MoreScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
-                  getButton(Icons.shopping_bag_outlined, "My Orders", false, "0",  MaterialPageRoute(builder: (_) => OrderScreen())),
-                  getButton(Icons.shopping_cart, "My Cart", false, "0",  MaterialPageRoute(builder: (_) => CartScreen())),
-                  getButton(Icons.home, "My Addresses", false, "0",  MaterialPageRoute(builder: (_) => OffersScreen())),
 
                   // Top Row Items
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Padding(padding: EdgeInsets.all(15), child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+
                         SquareButton(
-                          image: Images.cart_image,
-                          title: getTranslated('CART', context),
+                          icon: Icons.shopping_cart,
+                          title: "My Cart",
                           navigateTo: CartScreen(),
                           count:
                           Provider.of<CartProvider>(context, listen: false)
                               .cartList
                               .length,
-                          hasCount: true,
-
+                          hasCount: false,
                         ),
                         SquareButton(
-                          image: Images.shopping_image,
-                          title: getTranslated('orders', context),
+                          icon: Icons.shopping_bag,
+                          title: "My Orders",
                           navigateTo: OrderScreen(),
                           count: 1,
                           hasCount: false,
                         ),
+                        SquareButton(
+                          icon: Icons.find_in_page,
+                          title: "Browse Categories",
+                          navigateTo: OffersScreen(),
+                          count: 0,
+                          hasCount: false,
+                        ),
 
-                      ]),
-                  SizedBox(height: 40,),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      ]),),
+                  Padding(padding: EdgeInsets.all(15), child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
 
                         SquareButton(
-                          image: Images.wishlist,
+                          icon: Icons.favorite,
                           title: getTranslated('wishlist', context),
                           navigateTo: WishListScreen(),
                           count:
@@ -219,7 +223,7 @@ class _MoreScreenState extends State<MoreScreen> {
                           hasCount: false,
                         ),
                         SquareButton(
-                          image: Images.offers,
+                          icon: Icons.star,
                           title: getTranslated('offers', context),
                           navigateTo: OffersScreen(),
                           count: 0,
@@ -227,7 +231,7 @@ class _MoreScreenState extends State<MoreScreen> {
                         ),
                         SquareButton(
 
-                          image: Images.offers,
+                          icon: Icons.home,
                           title: "My Addresses",
                           navigateTo: OffersScreen(),
                           count: 0,
@@ -235,108 +239,72 @@ class _MoreScreenState extends State<MoreScreen> {
                         ),
 
 
-                      ]),
+                      ]),),
                   SizedBox(height: Dimensions.PADDING_SIZE_SMALL),
 
-                  // Buttons
-                  TitleButton(
-                      image: Images.fast_delivery,
-                      title: "My Address",
-                      navigateTo: AddressListScreen()),
-                  TitleButton(
-                      image: Images.more_filled_image,
-                      title: "Browse all categories",
-                      navigateTo: AllCategoryScreen()),
-                  TitleButton(
-                      image: Images.notification_filled,
-                      title: "My Notifications",
-                      navigateTo: NotificationScreen()),
-                  //TODO: seller
-                  TitleButton(
-                      image: Images.chats,
-                      title: "My Chats",
-                      navigateTo: InboxScreen()),
-                  TitleButton(
-                      image: Images.settings,
-                      title: "Additional Settings",
-                      navigateTo: SettingsScreen()),
-                  TitleButton(
-                      image: Images.preference,
-                      title: "Support Tickets, Help Centre",
-                      navigateTo: SupportTicketScreen()),
-                  TitleButton(
-                      image: Images.term_condition,
-                      title: getTranslated('terms_condition', context),
-                      navigateTo: HtmlViewScreen(
-                        title: getTranslated('terms_condition', context),
-                        url: Provider.of<SplashProvider>(context, listen: false)
-                            .configModel
-                            .termsConditions,
-                      )),
-                  TitleButton(
-                      image: Images.privacy_policy,
-                      title: getTranslated('privacy_policy', context),
-                      navigateTo: HtmlViewScreen(
-                        title: getTranslated('privacy_policy', context),
-                        url: Provider.of<SplashProvider>(context, listen: false)
-                            .configModel
-                            .termsConditions,
-                      )),
-                  TitleButton(
-                      image: Images.help_center,
-                      title: getTranslated('faq', context),
-                      navigateTo: FaqScreen(
-                        title: getTranslated('faq', context),
-                        // url: Provider.of<SplashProvider>(context, listen: false).configModel.staticUrls.faq,
-                      )),
-
-                  TitleButton(
-                      image: Images.about_us,
-                      title: getTranslated('about_us', context),
-                      navigateTo: HtmlViewScreen(
-                        title: getTranslated('about_us', context),
-                        url: Provider.of<SplashProvider>(context, listen: false)
-                            .configModel
-                            .aboutUs,
-                      )),
-
-                  TitleButton(
-                      image: Images.contact_us,
-                      title: getTranslated('contact_us', context),
-                      navigateTo: WebViewScreen(
+                  getButton(Icons.notifications_active, "My Notifications", false, "0",  MaterialPageRoute(builder: (_) => NotificationScreen())),
+                  getButton(Icons.inbox_rounded, "My Inbox", false, "0",  MaterialPageRoute(builder: (_) => InboxScreen())),
+                  getButton(Icons.settings, "Settings", false, "0",  MaterialPageRoute(builder: (_) => SettingsScreen())),
+                  getButton(
+                    Icons.phone,
+                    "Contact Us",
+                    false,
+                    "0",
+                      MaterialPageRoute(builder: (_) => WebViewScreen(
                         title: getTranslated('contact_us', context),
                         url: Provider.of<SplashProvider>(context, listen: false)
                             .configModel
                             .staticUrls
                             .contactUs,
-                      )),
+                      ))
 
+                  ),
+                  getButton(Icons.account_box_rounded, "About Us", false, "0",  MaterialPageRoute(builder: (_) => OffersScreen())),
+                  getButton(Icons.question_answer, "FAQ's", false, "0",  MaterialPageRoute(builder: (_) => FaqScreen(
+                    title: getTranslated('faq', context),
+                    // url: Provider.of<SplashProvider>(context, listen: false).configModel.staticUrls.faq,
+                  ))),
+                  getButton(Icons.label_important, "Terms, Conditions", false, "0",  MaterialPageRoute(builder: (_) => HtmlViewScreen(
+                    title: getTranslated('terms_condition', context),
+                    url: Provider.of<SplashProvider>(context, listen: false)
+                        .configModel
+                        .termsConditions,
+                  ))),
+                  getButton(Icons.pending_actions, "Policies", false, "0",  MaterialPageRoute(builder: (_) => HtmlViewScreen(
+                    title: getTranslated('privacy_policy', context),
+                    url: Provider.of<SplashProvider>(context, listen: false)
+                        .configModel
+                        .termsConditions,
+                  ))),
+                  getButton(Icons.help_outline, "Help Centre", false, "0",  MaterialPageRoute(builder: (_) => SupportTicketScreen())),
                   ListTile(
-                    leading: Image.asset(Images.logo_image,
-                        width: 25,
-                        height: 25,
-                        fit: BoxFit.fill,
-                        color: ColorResources.getPrimary(context)),
+                    leading: Icon(Icons.perm_device_info),
                     title: Text(getTranslated('app_info', context),
                         style: titilliumRegular.copyWith(
-                            fontSize: Dimensions.FONT_SIZE_LARGE)),
+                            fontSize: Dimensions.FONT_SIZE_LARGE, color: Colors.black45)),
                     onTap: () => showAnimatedDialog(context, AppInfoDialog(),
                         isFlip: true),
                   ),
 
-                  isGuestMode
-                      ? SizedBox()
-                      : ListTile(
-                          leading: Icon(Icons.exit_to_app,
-                              color: ColorResources.getPrimary(context),
-                              size: 25),
-                          title: Text(getTranslated('sign_out', context),
-                              style: titilliumRegular.copyWith(
-                                  fontSize: Dimensions.FONT_SIZE_LARGE)),
-                          onTap: () => showAnimatedDialog(
-                              context, SignOutConfirmationDialog(),
-                              isFlip: true),
-                        ),
+
+                  TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.redAccent),
+                      onPressed: (){
+                        showAnimatedDialog(
+                            context, SignOutConfirmationDialog(),
+                            isFlip: true);
+                      },
+                      child: Padding(padding: EdgeInsets.all(10),child: Row(children: [
+                    Icon(Icons.logout, color: Colors.white,),
+                    SizedBox(width: 30,),
+                    Text("Logout", style: TextStyle(color: Colors.white),)
+                  ],),)),
+                  // Buttons
+                  // TitleButton(
+                  //     image: Images.fast_delivery,
+                  //     title: "My Address",
+                  //     navigateTo: AddressListScreen()),
+
                 ]),
           ),
         ),
@@ -350,11 +318,11 @@ class _MoreScreenState extends State<MoreScreen> {
         onPressed: (){
       Navigator.push(context,
           screen);
-    }, child: Padding(padding: EdgeInsets.all(5), child: Row(
+    }, child: Padding(padding: EdgeInsets.only(left: 28, bottom: 10), child: Row(
       children: [
-        Icon(icon, size: 32,),
+        Icon(icon, size: 28,color: Theme.of(context).primaryColor),
         SizedBox(width: 20,),
-        Text(text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
+        Text(text, style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Theme.of(context).primaryColor),)
       ],
     ),));
   }
@@ -362,14 +330,15 @@ class _MoreScreenState extends State<MoreScreen> {
 }
 
 class SquareButton extends StatelessWidget {
-  final String image;
+  final IconData icon;
   final String title;
   final Widget navigateTo;
   final int count;
   final bool hasCount;
 
   SquareButton(
-      {@required this.image,
+      {
+        @required this.icon,
       @required this.title,
       @required this.navigateTo,
       @required this.count,
@@ -393,7 +362,8 @@ class SquareButton extends StatelessWidget {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              Image.asset(image, color: Theme.of(context).highlightColor),
+              Icon(icon, color: Colors.white,size: 21,),
+              // Image.asset(image, color: Theme.of(context).highlightColor),
               hasCount
                   ? Positioned(
                       top: -4,

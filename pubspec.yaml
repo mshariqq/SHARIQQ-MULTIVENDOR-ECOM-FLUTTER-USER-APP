@@ -21,7 +21,6 @@ environment:
 #  sdk: ">=2.17.0-69.2.beta <3.0.0"
   sdk: ">=2.7.0 <3.0.0"
 
-
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -79,14 +78,14 @@ flutter:
   fonts:
     - family: TitilliumWeb
       fonts:
-        - asset: assets/fonts/titillium/TitilliumWeb-Regular.ttf
-        - asset: assets/fonts/titillium/TitilliumWeb-Italic.ttf
-        - asset: assets/fonts/titillium/TitilliumWeb-SemiBold.ttf
+        - asset: assets/fonts/lato/Lato-Regular.ttf
+        - asset: assets/fonts/lato/Lato-Italic.ttf
+#        - asset: assets/fonts/titillium/Lato-Bold.ttf
           weight: 600
-        - asset: assets/fonts/titillium/TitilliumWeb-Bold.ttf
+        - asset: assets/fonts/lato/Lato-Bold.ttf
           weight: 700
     - family: Roboto
       fonts:
-        - asset: assets/fonts/roboto/Roboto-Regular.ttf
-        - asset: assets/fonts/roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
           weight: 700

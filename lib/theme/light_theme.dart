@@ -6,6 +6,7 @@ ThemeData light = ThemeData(
   primaryColor: Color(0xFF1E1C66),
   brightness: Brightness.light,
   highlightColor: Colors.white,
+  backgroundColor: Colors.white,
   // hintColor: Color(0xFF9E9E9E),
   hintColor: Colors.blueAccent,
   pageTransitionsTheme: PageTransitionsTheme(builders: {

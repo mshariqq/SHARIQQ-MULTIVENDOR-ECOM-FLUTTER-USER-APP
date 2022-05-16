@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:shariqq_multivendor_ecom_userapp/provider/theme_provider.dart';
 import 'package:shariqq_multivendor_ecom_userapp/utill/custom_themes.dart';
 import 'package:shariqq_multivendor_ecom_userapp/utill/dimensions.dart';
-import 'package:shariqq_multivendor_ecom_userapp/utill/images.dart';
 import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget {

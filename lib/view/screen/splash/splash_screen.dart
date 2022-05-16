@@ -108,31 +108,36 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       key: _globalKey,
       body: Provider.of<SplashProvider>(context).hasConnection
           ? Stack(
               clipBehavior: Clip.none,
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  color: Provider.of<ThemeProvider>(context).darkTheme
-                      ? Colors.black
-                      : ColorResources.getPrimary(context),
-                  child: CustomPaint(
-                    painter: SplashPainter(),
-                  ),
-                ),
+                // Container(
+                //   width: MediaQuery.of(context).size.width,
+                //   height: MediaQuery.of(context).size.height,
+                //   color: Provider.of<ThemeProvider>(context).darkTheme
+                //       ? Colors.black
+                //       : ColorResources.getPrimary(context),
+                //   child: CustomPaint(
+                //     painter: SplashPainter(),
+                //   ),
+                // ),
                 Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Image.asset(Images.splash_logo,
-                          height: 250.0, fit: BoxFit.scaleDown, width: 250.0),
+                          height: 150.0, fit: BoxFit.scaleDown, width: 150.0),
                       SizedBox(
-                        height: 250,
+                        height: 100,
                       ),
-                      Text("Demo User Application by Shariqq Multivendor Ecom", style: TextStyle(color: Colors.white),)
+                      Text("SHARIQQ.COM", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("v 2.0.0", style: TextStyle(color: Theme.of(context).primaryColor),)
                     ],
                   ),
                 ),

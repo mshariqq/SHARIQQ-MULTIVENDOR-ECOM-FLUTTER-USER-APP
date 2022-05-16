@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shariqq_multivendor_ecom_userapp/provider/cart_provider.dart';
@@ -61,20 +62,20 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
+      backgroundColor: Theme.of(context).highlightColor,
+      body: Stack(
+          children: [
         // Background
         Positioned(
           top: 0,
           left: 0,
           right: 0,
           child: Container(
-            decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+            // decoration: BoxDecoration(color: Theme.of(context).highlightColor),
             // Images.more_page_header,
-            height: 160,
+            height: 50,
             // fit: BoxFit.fill,
-            color: Provider.of<ThemeProvider>(context).darkTheme
-                ? Colors.black
-                : null,
+            color: Theme.of(context).highlightColor
           ),
           // child: Image.asset(
           //   Images.more_page_header,
@@ -88,22 +89,20 @@ class _MoreScreenState extends State<MoreScreen> {
 
         // AppBar
         Positioned(
+          height: 50,
           top: 40,
           left: Dimensions.PADDING_SIZE_SMALL,
           right: Dimensions.PADDING_SIZE_SMALL,
           child: Consumer<ProfileProvider>(
             builder: (context, profile, child) {
               return Row(children: [
-                Image.asset(Images.logo_with_name_image,
-                    height: 35, color: ColorResources.WHITE),
-                Expanded(child: SizedBox.shrink()),
                 InkWell(
                   onTap: () {
                     if (isGuestMode) {
                       showAnimatedDialog(context, GuestDialog(), isFlip: true);
                     } else {
                       if (Provider.of<ProfileProvider>(context, listen: false)
-                              .userInfoModel !=
+                          .userInfoModel !=
                           null) {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ProfileScreen()));
@@ -111,41 +110,47 @@ class _MoreScreenState extends State<MoreScreen> {
                     }
                   },
                   child: Row(children: [
-                    Text(
-                        !isGuestMode
-                            ? profile.userInfoModel != null
-                                ? '${profile.userInfoModel.fName} ${profile.userInfoModel.lName}'
-                                : 'Full Name'
-                            : 'Guest',
-                        style: titilliumRegular.copyWith(
-                            color: ColorResources.WHITE)),
-                    SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
                     isGuestMode
                         ? CircleAvatar(child: Icon(Icons.person, size: 35))
                         : profile.userInfoModel == null
-                            ? CircleAvatar(child: Icon(Icons.person, size: 35))
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: FadeInImage.assetNetwork(
-                                  placeholder: Images.logo_image,
-                                  width: 35,
-                                  height: 35,
-                                  fit: BoxFit.fill,
-                                  image:
-                                      '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}/${profile.userInfoModel.image}',
-                                  imageErrorBuilder: (c, o, s) => CircleAvatar(
-                                      child: Icon(Icons.person, size: 35)),
-                                ),
-                              ),
+                        ? CircleAvatar(child: Icon(Icons.person, size: 35))
+                        : ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: Images.logo_image,
+                        width: 35,
+                        height: 35,
+                        fit: BoxFit.fill,
+                        image:
+                        '${Provider.of<SplashProvider>(context, listen: false).baseUrls.customerImageUrl}/${profile.userInfoModel.image}',
+                        imageErrorBuilder: (c, o, s) => CircleAvatar(
+                            child: Icon(Icons.person, size: 35)),
+                      ),
+                    ),
+                    SizedBox(width: Dimensions.PADDING_SIZE_SMALL),
+                    Text(
+                        !isGuestMode
+                            ? profile.userInfoModel != null
+                            ? '${profile.userInfoModel.fName} ${profile.userInfoModel.lName}'
+                            : 'Full Name'
+                            : 'Guest',
+                        style: titilliumRegular.copyWith(
+                            color: ColorResources.getPrimary(context), fontWeight: FontWeight.bold, fontSize: 21),),
+
                   ]),
                 ),
+                Expanded(child: SizedBox.shrink()),
+                IconButton(onPressed: (){
+                  Navigator.pop(context);
+                }, icon: Icon(Icons.close, color: Colors.black, size: 32,))
+
               ]);
             },
           ),
         ),
 
         Container(
-          margin: EdgeInsets.only(top: 120),
+          margin: EdgeInsets.only(top: 100),
           decoration: BoxDecoration(
             color: ColorResources.getIconBg(context),
             borderRadius: BorderRadius.only(
@@ -157,6 +162,9 @@ class _MoreScreenState extends State<MoreScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
+                  getButton(Icons.shopping_bag_outlined, "My Orders", false, "0",  MaterialPageRoute(builder: (_) => OrderScreen())),
+                  getButton(Icons.shopping_cart, "My Cart", false, "0",  MaterialPageRoute(builder: (_) => CartScreen())),
+                  getButton(Icons.home, "My Addresses", false, "0",  MaterialPageRoute(builder: (_) => OffersScreen())),
 
                   // Top Row Items
                   Row(
@@ -171,6 +179,7 @@ class _MoreScreenState extends State<MoreScreen> {
                               .cartList
                               .length,
                           hasCount: true,
+
                         ),
                         SquareButton(
                           image: Images.shopping_image,
@@ -179,6 +188,13 @@ class _MoreScreenState extends State<MoreScreen> {
                           count: 1,
                           hasCount: false,
                         ),
+
+                      ]),
+                  SizedBox(height: 40,),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+
                         SquareButton(
                           image: Images.wishlist,
                           title: getTranslated('wishlist', context),
@@ -205,6 +221,14 @@ class _MoreScreenState extends State<MoreScreen> {
                         SquareButton(
                           image: Images.offers,
                           title: getTranslated('offers', context),
+                          navigateTo: OffersScreen(),
+                          count: 0,
+                          hasCount: false,
+                        ),
+                        SquareButton(
+
+                          image: Images.offers,
+                          title: "My Addresses",
                           navigateTo: OffersScreen(),
                           count: 0,
                           hasCount: false,
@@ -319,6 +343,22 @@ class _MoreScreenState extends State<MoreScreen> {
       ]),
     );
   }
+
+  getButton(IconData icon, String text, bool count, String dcount, Route screen){
+    return TextButton(
+
+        onPressed: (){
+      Navigator.push(context,
+          screen);
+    }, child: Padding(padding: EdgeInsets.all(5), child: Row(
+      children: [
+        Icon(icon, size: 32,),
+        SizedBox(width: 20,),
+        Text(text, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)
+      ],
+    ),));
+  }
+
 }
 
 class SquareButton extends StatelessWidget {

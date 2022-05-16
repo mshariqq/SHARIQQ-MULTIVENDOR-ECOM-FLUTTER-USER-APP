@@ -32,6 +32,7 @@ import 'package:shariqq_multivendor_ecom_userapp/view/screen/home/widget/latest_
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/home/widget/products_view.dart';
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/flashdeal/flash_deal_screen.dart';
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/home/widget/top_seller_view.dart';
+import 'package:shariqq_multivendor_ecom_userapp/view/screen/more/more_screen.dart';
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/product/view_all_product_screen.dart';
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/search/search_screen.dart';
 import 'package:shariqq_multivendor_ecom_userapp/view/screen/topSeller/all_top_seller_screen.dart';
@@ -123,10 +124,17 @@ class _HomePageState extends State<HomePage> {
                 automaticallyImplyLeading: false,
                 backgroundColor: Theme.of(context).highlightColor,
                 title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    IconButton(onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => MoreScreen()));
+                    }, icon: Icon(Icons.menu_sharp, color: Theme.of(context).primaryColor,)),
+                    SizedBox(width: 20,),
                     Image.asset(Images.logo_with_name_image, height: 25),
                     SizedBox(width: 10,),
-                    Flexible(child: Text("SHARIQQ MULTIVENDOR" ,style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 18),))
+                    Flexible(child: Text("SHARIQQ.COM" ,style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold, fontSize: 18),))
                   ],
                 ),
                 actions: [

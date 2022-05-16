@@ -35,14 +35,14 @@ class SupportTicketScreen extends StatelessWidget {
         onTap: () => Navigator.push(
             context, MaterialPageRoute(builder: (_) => IssueTypeScreen())),
         child: Material(
-          color: ColorResources.getColombiaBlue(context),
+          color: Theme.of(context).primaryColor,
           elevation: 5,
           borderRadius: BorderRadius.circular(50),
           child: Row(mainAxisSize: MainAxisSize.min, children: [
             Container(
               padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
               decoration: BoxDecoration(
-                color: ColorResources.getFloatingBtn(context),
+                color: Theme.of(context).hintColor,
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.add, color: Colors.white, size: 35),
@@ -50,7 +50,7 @@ class SupportTicketScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Dimensions.PADDING_SIZE_DEFAULT),
-              child: Text(getTranslated('new_ticket', context),
+              child: Text("Create a Ticket",
                   style: titilliumSemiBold.copyWith(
                       color: Colors.white,
                       fontSize: Dimensions.FONT_SIZE_LARGE)),

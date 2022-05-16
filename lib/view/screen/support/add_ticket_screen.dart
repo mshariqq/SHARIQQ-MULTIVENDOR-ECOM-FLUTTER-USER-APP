@@ -43,15 +43,15 @@ class _AddTicketScreenState extends State<AddTicketScreen> {
           physics: BouncingScrollPhysics(),
           padding: EdgeInsets.all(Dimensions.PADDING_SIZE_LARGE),
           children: [
-            Text(getTranslated('add_new_ticket', context),
+            Text("Please enter details",
                 style: titilliumSemiBold.copyWith(fontSize: 20)),
-            SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
+            SizedBox(height: 10),
             Container(
-              color: ColorResources.getLowGreen(context),
+              color: Colors.white,
               margin: EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_LARGE),
               child: ListTile(
                 leading: Icon(Icons.query_builder,
-                    color: ColorResources.getPrimary(context)),
+                    color: Theme.of(context).primaryColor),
                 title: Text(widget.type, style: robotoBold),
                 onTap: () {},
               ),
@@ -60,19 +60,19 @@ class _AddTicketScreenState extends State<AddTicketScreen> {
               focusNode: _subjectNode,
               nextNode: _descriptionNode,
               textInputAction: TextInputAction.next,
-              hintText: getTranslated('write_your_subject', context),
+              hintText: "Subject",
               controller: _subjectController,
             ),
-            SizedBox(height: Dimensions.PADDING_SIZE_LARGE),
+            SizedBox(height: 10),
             CustomTextField(
               focusNode: _descriptionNode,
               textInputAction: TextInputAction.newline,
-              hintText: getTranslated('issue_description', context),
+              hintText: "Description",
               textInputType: TextInputType.multiline,
               controller: _descriptionController,
               maxLine: 5,
             ),
-            SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_LARGE),
+            SizedBox(height: 10),
             Provider.of<SupportTicketProvider>(context).isLoading
                 ? Center(
                     child: CircularProgressIndicator(
@@ -81,14 +81,14 @@ class _AddTicketScreenState extends State<AddTicketScreen> {
                 : Builder(
                     key: _scaffoldKey,
                     builder: (context) => CustomButton(
-                        buttonText: getTranslated('submit', context),
+                        buttonText: "Create Now",
                         onTap: () {
                           if (_subjectController.text.isEmpty) {
                             showCustomSnackBar(
-                                'Subject box should not be empty', context);
+                                'Subject required', context);
                           } else if (_descriptionController.text.isEmpty) {
                             showCustomSnackBar(
-                                'Description box should not be empty', context);
+                                'Description required', context);
                           } else {
                             SupportTicketBody supportTicketModel =
                                 SupportTicketBody(

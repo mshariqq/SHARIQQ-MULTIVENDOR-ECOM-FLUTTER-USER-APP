@@ -26,10 +26,15 @@ class NotificationScreen extends StatelessWidget {
         .initNotificationList(context);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Notifications"),
+        elevation: 0,
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
       body: Column(children: [
-        CustomAppBar(
-            title: getTranslated('notification', context),
-            isBackButtonExist: isBacButtonExist),
+        // CustomAppBar(
+        //     title: getTranslated('notification', context),
+        //     isBackButtonExist: isBacButtonExist),
         Expanded(
           child: Consumer<NotificationProvider>(
             builder: (context, notification, child) {

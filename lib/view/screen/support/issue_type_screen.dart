@@ -26,14 +26,14 @@ class IssueTypeScreen extends StatelessWidget {
           padding: EdgeInsets.only(
               top: Dimensions.PADDING_SIZE_LARGE,
               left: Dimensions.PADDING_SIZE_LARGE),
-          child: Text(getTranslated('add_new_ticket', context),
+          child: Text("You can create a ticket",
               style: titilliumSemiBold.copyWith(fontSize: 20)),
         ),
         Padding(
           padding: EdgeInsets.only(
               left: Dimensions.PADDING_SIZE_LARGE,
               bottom: Dimensions.PADDING_SIZE_LARGE),
-          child: Text(getTranslated('select_your_category', context),
+          child: Text("Please select issue type",
               style: titilliumRegular),
         ),
         Expanded(
@@ -45,10 +45,10 @@ class IssueTypeScreen extends StatelessWidget {
           itemCount: issueTypeList.length,
           itemBuilder: (context, index) {
             return Container(
-              color: ColorResources.getLowGreen(context),
+              color: Colors.white,
               margin: EdgeInsets.only(bottom: Dimensions.PADDING_SIZE_SMALL),
               child: ListTile(
-                leading: Icon(Icons.query_builder,
+                leading: Icon(Icons.arrow_right,
                     color: ColorResources.getPrimary(context)),
                 title: Text(issueTypeList[index], style: robotoBold),
                 onTap: () {

@@ -105,6 +105,7 @@ class _CartScreenState extends State<CartScreen> {
       return Scaffold(
         appBar: AppBar(
           title: Text("Items in Cart"),
+          elevation: 0,
           backgroundColor: Theme.of(context).primaryColor,
           // Use [Brightness.light] for black status bar
           // or [Brightness.dark] for white status bar

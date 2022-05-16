@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget {
     return Stack(children: [
       ClipRRect(
         borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5)),
+            bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0)),
         child: Container(
           decoration: BoxDecoration(color: Theme.of(context).primaryColor),
           // Images.toolbar_background,
@@ -53,7 +53,7 @@ class CustomAppBar extends StatelessWidget {
           isBackButtonExist
               ? IconButton(
                   icon:
-                      Icon(Icons.arrow_back_ios, size: 20, color: Colors.white),
+                      Icon(Icons.arrow_back_outlined, size: 20, color: Colors.white),
                   onPressed: () => onBackPressed != null
                       ? onBackPressed()
                       : Navigator.of(context).pop(),

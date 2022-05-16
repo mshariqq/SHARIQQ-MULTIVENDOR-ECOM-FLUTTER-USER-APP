@@ -189,7 +189,7 @@ class _MoreScreenState extends State<MoreScreen> {
                         SquareButton(
                           icon: Icons.find_in_page,
                           title: "Browse Categories",
-                          navigateTo: OffersScreen(),
+                          navigateTo: AllCategoryScreen(),
                           count: 0,
                           hasCount: false,
                         ),
@@ -259,7 +259,7 @@ class _MoreScreenState extends State<MoreScreen> {
                       ))
 
                   ),
-                  getButton(Icons.account_box_rounded, "About Us", false, "0",  MaterialPageRoute(builder: (_) => OffersScreen())),
+                  // getButton(Icons.account_box_rounded, "About Us", false, "0",  MaterialPageRoute(builder: (_) => OffersScreen())),
                   getButton(Icons.question_answer, "FAQ's", false, "0",  MaterialPageRoute(builder: (_) => FaqScreen(
                     title: getTranslated('faq', context),
                     // url: Provider.of<SplashProvider>(context, listen: false).configModel.staticUrls.faq,
@@ -277,16 +277,6 @@ class _MoreScreenState extends State<MoreScreen> {
                         .termsConditions,
                   ))),
                   getButton(Icons.help_outline, "Help Centre", false, "0",  MaterialPageRoute(builder: (_) => SupportTicketScreen())),
-                  ListTile(
-                    leading: Icon(Icons.perm_device_info),
-                    title: Text(getTranslated('app_info', context),
-                        style: titilliumRegular.copyWith(
-                            fontSize: Dimensions.FONT_SIZE_LARGE, color: Colors.black45)),
-                    onTap: () => showAnimatedDialog(context, AppInfoDialog(),
-                        isFlip: true),
-                  ),
-
-
                   TextButton(
                     style: TextButton.styleFrom(backgroundColor: Colors.redAccent),
                       onPressed: (){

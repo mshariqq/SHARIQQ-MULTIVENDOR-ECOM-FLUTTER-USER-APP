@@ -42,8 +42,8 @@ class InboxScreen extends StatelessWidget {
         Stack(children: [
           ClipRRect(
             borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(5),
-                bottomRight: Radius.circular(5)),
+                bottomLeft: Radius.circular(0),
+                bottomRight: Radius.circular(0)),
             child: Container(
               decoration: BoxDecoration(color: Theme.of(context).primaryColor),
               // Images.more_page_header,
@@ -70,7 +70,7 @@ class InboxScreen extends StatelessWidget {
             child: Row(children: [
               isBackButtonExist
                   ? IconButton(
-                      icon: Icon(Icons.arrow_back_ios,
+                      icon: Icon(Icons.arrow_back_outlined,
                           size: 20, color: ColorResources.WHITE),
                       onPressed: () => Navigator.of(context).pop(),
                     )
@@ -81,14 +81,14 @@ class InboxScreen extends StatelessWidget {
                     ? TextField(
                         autofocus: true,
                         decoration: InputDecoration(
-                          hintText: 'Search in Chats....',
+                          hintText: 'Search Chats, Messages....',
                           border: InputBorder.none,
                           hintStyle: titilliumRegular.copyWith(
                               color: ColorResources.GAINS_BORO),
                         ),
                         style: titilliumSemiBold.copyWith(
                             color: ColorResources.WHITE,
-                            fontSize: Dimensions.FONT_SIZE_LARGE),
+                             fontWeight: FontWeight.normal),
                         onChanged: (String query) {
                           Provider.of<ChatProvider>(context, listen: false)
                               .filterList(query);

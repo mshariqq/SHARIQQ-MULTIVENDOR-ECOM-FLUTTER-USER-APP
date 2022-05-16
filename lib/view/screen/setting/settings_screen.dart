@@ -23,59 +23,59 @@ class SettingsScreen extends StatelessWidget {
             .setFromSetting(false);
         return Future.value(true);
       },
-      child: CustomExpandedAppBar(
-          title: getTranslated('settings', context),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  top: Dimensions.PADDING_SIZE_LARGE,
-                  left: Dimensions.PADDING_SIZE_LARGE),
-              child: Text(getTranslated('settings', context),
-                  style: titilliumSemiBold.copyWith(
-                      fontSize: Dimensions.FONT_SIZE_LARGE)),
-            ),
-            Expanded(
-                child: ListView(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.symmetric(
-                  horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-              children: [
-                SwitchListTile(
-                  value: Provider.of<ThemeProvider>(context).darkTheme,
-                  onChanged: (bool isActive) =>
-                      Provider.of<ThemeProvider>(context, listen: false)
-                          .toggleTheme(),
-                  title: Text(getTranslated('dark_theme', context),
-                      style: titilliumRegular.copyWith(
-                          fontSize: Dimensions.FONT_SIZE_LARGE)),
-                ),
-                TitleButton(
-                  image: Images.language,
-                  title: getTranslated('choose_language', context),
-                  onTap: () => showAnimatedDialog(
-                      context, CurrencyDialog(isCurrency: false)),
-                ),
-                TitleButton(
-                  image: Images.currency,
-                  title:
-                      '${getTranslated('currency', context)} (${Provider.of<SplashProvider>(context).myCurrency.name})',
-                  onTap: () => showAnimatedDialog(context, CurrencyDialog()),
-                ),
-                /*TitleButton(
+      child: Scaffold(
+        appBar: AppBar(title: Text("Additional Settings"), backgroundColor: Theme.of(context).primaryColor,elevation: 0,),
+        body: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: Dimensions.PADDING_SIZE_LARGE,
+                left: Dimensions.PADDING_SIZE_LARGE),
+            child: Text(getTranslated('settings', context),
+                style: titilliumSemiBold.copyWith(
+                    fontSize: Dimensions.FONT_SIZE_LARGE)),
+          ),
+          Expanded(
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+                children: [
+                  SwitchListTile(
+                    value: Provider.of<ThemeProvider>(context).darkTheme,
+                    onChanged: (bool isActive) =>
+                        Provider.of<ThemeProvider>(context, listen: false)
+                            .toggleTheme(),
+                    title: Text(getTranslated('dark_theme', context),
+                        style: titilliumRegular.copyWith(
+                            fontSize: Dimensions.FONT_SIZE_LARGE)),
+                  ),
+                  TitleButton(
+                    image: Icons.flag,
+                    title: getTranslated('choose_language', context),
+                    onTap: () => showAnimatedDialog(
+                        context, CurrencyDialog(isCurrency: false)),
+                  ),
+                  TitleButton(
+                    image: Icons.monetization_on_outlined,
+                    title:
+                    '${getTranslated('currency', context)} (${Provider.of<SplashProvider>(context).myCurrency.name})',
+                    onTap: () => showAnimatedDialog(context, CurrencyDialog()),
+                  ),
+                  /*TitleButton(
                 image: Images.preference,
                 title: Strings.preference,
                 onTap: () => showAnimatedDialog(context, PreferenceDialog()),
               ),*/
-              ],
-            )),
-          ])),
+                ],
+              )),
+        ]),
+      )
     );
   }
 }
 
 class TitleButton extends StatelessWidget {
-  final String image;
+  final IconData image;
   final String title;
   final Function onTap;
   TitleButton(
@@ -84,11 +84,7 @@ class TitleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.asset(image,
-          width: 25,
-          height: 25,
-          fit: BoxFit.fill,
-          color: ColorResources.getPrimary(context)),
+      leading: Icon(image),
       title: Text(title,
           style:
               titilliumRegular.copyWith(fontSize: Dimensions.FONT_SIZE_LARGE)),

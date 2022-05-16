@@ -34,18 +34,22 @@ class CustomExpandedAppBar extends StatelessWidget {
           : bottomChild,
       body: Stack(children: [
         // Background
-        Image.asset(
-          Images.more_page_header,
+        Container(
           height: 150,
-          fit: BoxFit.fill,
-          width: MediaQuery.of(context).size.width,
-          color: Provider.of<ThemeProvider>(context).darkTheme
-              ? Colors.black
-              : null,
+          color: Theme.of(context).primaryColor,
         ),
+        // Image.asset(
+        //   Images.more_page_header,
+        //   height: 150,
+        //   fit: BoxFit.fill,
+        //   width: MediaQuery.of(context).size.width,
+        //   color: Provider.of<ThemeProvider>(context).darkTheme
+        //       ? Colors.black
+        //       : null,
+        // ),
 
         Positioned(
-          top: 40,
+          top: 30,
           left: Dimensions.PADDING_SIZE_SMALL,
           right: Dimensions.PADDING_SIZE_SMALL,
           child: Row(children: [
@@ -69,7 +73,7 @@ class CustomExpandedAppBar extends StatelessWidget {
           decoration: BoxDecoration(
             color: ColorResources.getHomeBg(context),
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                topLeft: Radius.circular(2), topRight: Radius.circular(2)),
           ),
           child: isGuestCheck
               ? isGuestMode

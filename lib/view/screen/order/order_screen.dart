@@ -34,12 +34,17 @@ class OrderScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("My Orders"),
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 0,
+      ),
       backgroundColor: ColorResources.getIconBg(context),
       body: Column(
         children: [
-          CustomAppBar(
-              title: getTranslated('ORDER', context),
-              isBackButtonExist: isBacButtonExist),
+          // CustomAppBar(
+          //     title: getTranslated('ORDER', context),
+          //     isBackButtonExist: isBacButtonExist),
           isGuestMode
               ? SizedBox()
               : Provider.of<OrderProvider>(context).pendingList != null

@@ -18,10 +18,15 @@ class AllCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Browse Categories"),
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 0,
+      ),
       backgroundColor: ColorResources.getIconBg(context),
       body: Column(
         children: [
-          CustomAppBar(title: getTranslated('CATEGORY', context)),
+          // CustomAppBar(title: getTranslated('CATEGORY', context)),
           Expanded(child: Consumer<CategoryProvider>(
             builder: (context, categoryProvider, child) {
               return categoryProvider.categoryList.length != 0

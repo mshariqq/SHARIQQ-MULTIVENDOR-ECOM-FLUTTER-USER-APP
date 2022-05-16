@@ -57,8 +57,6 @@ class _CartScreenState extends State<CartScreen> {
       List<CartModel> cartList = [];
       cartList.addAll(cart.cartList);
 
-      //TODO: seller
-
       List<String> sellerList = [];
       List<CartModel> sellerGroupList = [];
       List<List<CartModel>> cartProductList = [];
@@ -105,6 +103,14 @@ class _CartScreenState extends State<CartScreen> {
       // amount += shippingAmount;
 
       return Scaffold(
+        appBar: AppBar(
+          title: Text("Items in Cart"),
+          backgroundColor: Theme.of(context).primaryColor,
+          // Use [Brightness.light] for black status bar
+          // or [Brightness.dark] for white status bar
+          // https://stackoverflow.com/a/58132007/1321917
+            brightness: Brightness.light
+        ),
         bottomNavigationBar: (!widget.fromCheckout && !cart.isLoading)
             ? Container(
                 height: 60,
@@ -121,13 +127,13 @@ class _CartScreenState extends State<CartScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                          child: Center(
-                              child: Text(
-                        PriceConverter.convertPrice(
-                            context, amount + shippingAmount),
-                        style: titilliumSemiBold.copyWith(
-                            color: Theme.of(context).highlightColor),
-                      ))),
+                          child: Text(
+                PriceConverter.convertPrice(
+                    context, amount + shippingAmount),
+          style: titilliumSemiBold.copyWith(
+              color: Theme.of(context).highlightColor),
+        )
+                      ),
                       Builder(
                         builder: (context) => TextButton(
                           onPressed: () {
@@ -183,7 +189,7 @@ class _CartScreenState extends State<CartScreen> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                           ),
-                          child: Text(getTranslated('checkout', context),
+                          child: Text('Proceed to Checkout',
                               style: titilliumSemiBold.copyWith(
                                 fontSize: Dimensions.FONT_SIZE_EXTRA_SMALL,
                                 color: ColorResources.getPrimary(context),
@@ -194,7 +200,7 @@ class _CartScreenState extends State<CartScreen> {
               )
             : null,
         body: Column(children: [
-          CustomAppBar(title: getTranslated('CART', context)),
+          // CustomAppBar(title: getTranslated('CART', context)),
           cart.isLoading
               ? Padding(
                   padding: const EdgeInsets.only(top: 200.0),
@@ -241,7 +247,7 @@ class _CartScreenState extends State<CartScreen> {
                                                     padding:
                                                         const EdgeInsets.all(
                                                             8.0),
-                                                    child: Text(
+                                                    child: Text("Vendor : " +
                                                         sellerGroupList[index]
                                                             .shopInfo,
                                                         textAlign:
@@ -337,7 +343,7 @@ class _CartScreenState extends State<CartScreen> {
                                                               decoration:
                                                                   BoxDecoration(
                                                                 border: Border.all(
-                                                                    width: 0.5,
+                                                                    width: 1,
                                                                     color: Colors
                                                                         .grey),
                                                                 borderRadius: BorderRadius
@@ -414,10 +420,10 @@ class _CartScreenState extends State<CartScreen> {
                                             'not_logged_in', context);
                                       }
                                     },
-                                    child: Container(
+                                    child: Padding(padding: EdgeInsets.all(10),child: Container(
                                       decoration: BoxDecoration(
                                         border: Border.all(
-                                            width: 0.5, color: Colors.grey),
+                                            width: 1, color: Theme.of(context).hintColor),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
                                       ),
@@ -425,7 +431,7 @@ class _CartScreenState extends State<CartScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                   getTranslated(
@@ -434,34 +440,34 @@ class _CartScreenState extends State<CartScreen> {
                                                   style: titilliumRegular),
                                               Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.end,
+                                                  MainAxisAlignment.end,
                                                   children: [
                                                     Text(
                                                       (cart.shippingList == null ||
-                                                              cart.chosenShippingList
-                                                                      .length ==
-                                                                  0 ||
-                                                              cart.shippingList
-                                                                      .length ==
-                                                                  0 ||
-                                                              cart
-                                                                      .shippingList[
-                                                                          0]
-                                                                      .shippingMethodList ==
-                                                                  null ||
-                                                              cart.shippingList[0]
-                                                                      .shippingIndex ==
-                                                                  -1)
+                                                          cart.chosenShippingList
+                                                              .length ==
+                                                              0 ||
+                                                          cart.shippingList
+                                                              .length ==
+                                                              0 ||
+                                                          cart
+                                                              .shippingList[
+                                                          0]
+                                                              .shippingMethodList ==
+                                                              null ||
+                                                          cart.shippingList[0]
+                                                              .shippingIndex ==
+                                                              -1)
                                                           ? ''
                                                           : '${cart.shippingList[0].shippingMethodList[cart.shippingList[0].shippingIndex].title.toString()}',
                                                       style: titilliumSemiBold
                                                           .copyWith(
-                                                              color: ColorResources
-                                                                  .getPrimary(
-                                                                      context)),
+                                                          color: ColorResources
+                                                              .getPrimary(
+                                                              context)),
                                                       maxLines: 1,
                                                       overflow:
-                                                          TextOverflow.ellipsis,
+                                                      TextOverflow.ellipsis,
                                                     ),
                                                     SizedBox(
                                                         width: Dimensions
@@ -474,7 +480,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   ]),
                                             ]),
                                       ),
-                                    ),
+                                    ),),
                                   )
                                 : SizedBox(),
                           ],

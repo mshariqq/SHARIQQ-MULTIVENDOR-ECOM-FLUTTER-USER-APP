@@ -64,7 +64,7 @@ class ProductWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(Dimensions.PADDING_SIZE_SMALL),
               child: Container(
-                height: 66,
+                height: 75,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
